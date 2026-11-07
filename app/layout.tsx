@@ -1,13 +1,22 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { config } from "@/lib/config";
 
-const mono = JetBrains_Mono({ subsets: ["latin"], display: "swap" });
+const display = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+const body = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: `${config.name} | ${config.role}`,
-  description: `Portfólio de ${config.name}, ${config.role}.`,
+  description: `${config.name}: ${config.role}, ${config.headline}.`,
 };
 
 export default function RootLayout({
@@ -16,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
-      <body className={mono.className}>{children}</body>
+    <html lang="en">
+      <body className={`${display.variable} ${body.variable}`}>{children}</body>
     </html>
   );
 }

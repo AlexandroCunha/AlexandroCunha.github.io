@@ -1,30 +1,24 @@
-import { config } from "./config";
+import { config, type FeaturedProject } from "./config";
 
-export type Repo = {
+type Repo = {
   name: string;
   description: string | null;
   html_url: string;
   homepage: string | null;
-  language: string | null;
   stargazers_count: number;
   fork: boolean;
-  topics?: string[];
 };
 
-// Fallback caso a API falhe no build (limite de requisições, etc.)
-const fallback: Repo[] = [
-  {
-    name: "Financify",
-    description: "API REST para Gerenciamento de Finanças Pessoais",
-    html_url: `https://github.com/${config.githubUser}/Financify`,
-    homepage: null,
-    language: "JavaScript",
-    stargazers_count: 0,
-    fork: false,
-  },
-];
+export type Project = {
+  title: string;
+  description: string;
+  stack: string[];
+  url: string;
+  homepage?: string;
+  stars: number | null;
+};
 
-export async function getRepos(): Promise<Repo[]> {
+async function fetchRepos(): Promise<Repo[]> {
   try {
     const headers: Record<string, string> = {
       Accept: "application/vnd.github+json",
@@ -37,22 +31,28 @@ export async function getRepos(): Promise<Repo[]> {
       { headers },
     );
     if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-    const all = (await res.json()) as Repo[];
-
-    const visible = all.filter(
-      (r) => !r.fork && !config.hidden.includes(r.name),
-    );
-    const rank = (r: Repo) => {
-      const i = config.featured.indexOf(r.name);
-      return i === -1 ? Number.MAX_SAFE_INTEGER : i;
-    };
-    visible.sort(
-      (a, b) =>
-        rank(a) - rank(b) || b.stargazers_count - a.stargazers_count,
-    );
-    return visible.slice(0, config.maxProjects);
+    return (await res.json()) as Repo[];
   } catch (e) {
-    console.warn("Falha ao buscar repositórios, usando fallback:", e);
-    return fallback;
+    console.warn("Falha ao buscar repositórios, usando dados do config:", e);
+    return [];
   }
+}
+
+function resolve(p: FeaturedProject, repos: Repo[]): Project {
+  const repo = repos.find(
+    (r) => !r.fork && r.name.toLowerCase().includes(p.match.toLowerCase()),
+  );
+  return {
+    title: p.title,
+    description: p.description, // texto do config (mantém o site em inglês)
+    stack: p.stack,
+    url: repo?.html_url ?? p.url,
+    homepage: repo?.homepage || p.homepage || undefined,
+    stars: repo ? repo.stargazers_count : null,
+  };
+}
+
+export async function getProjects(): Promise<Project[]> {
+  const repos = await fetchRepos();
+  return config.projects.map((p) => resolve(p, repos));
 }

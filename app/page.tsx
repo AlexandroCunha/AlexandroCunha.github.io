@@ -1,78 +1,167 @@
 import { config } from "@/lib/config";
-import { getRepos } from "@/lib/github";
+import { getProjects } from "@/lib/github";
+import Reveal from "@/components/Reveal";
+import HeroArt from "@/components/HeroArt";
+
+function Divider() {
+  return (
+    <svg className="divider" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 30 C 200 0, 400 60, 600 30 S 1000 0, 1200 30" />
+    </svg>
+  );
+}
 
 export default async function Home() {
-  const repos = await getRepos();
+  const projects = await getProjects();
+  const { about } = config;
 
   return (
-    <main className="wrap">
-      <section className="hero">
-        <p className="prompt">$ whoami</p>
-        <h1>
-          Oi, eu sou o {config.name}<span className="cursor">_</span>
-        </h1>
-        <p className="role">
-          {config.role} · {config.tagline}
-        </p>
-        <div className="links">
-          <a href={config.links.github}>github</a>
-          <a href={config.links.linkedin}>linkedin</a>
-          <a href={config.links.email}>email</a>
-        </div>
-      </section>
+    <>
+      <header className="nav">
+        <a href="#top" className="brand">
+          {config.name}
+        </a>
+        <nav>
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </header>
 
-      <section>
-        <h2>
-          <span className="prompt">$</span> cat sobre.md
-        </h2>
-        {config.bio.map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-        <ul className="plain">
-          {config.hobbies.map((h) => (
-            <li key={h}>{h}</li>
-          ))}
-        </ul>
-      </section>
+      <main id="top">
+        <section className="hero">
+          <HeroArt />
+          <div className="hero-text">
+            <p className="eyebrow">{config.role}</p>
+            <h1>
+              Hi, I&apos;m
+              <br />
+              <em>{config.name}.</em>
+            </h1>
+            <p className="lead">
+              {config.headline}
+              <br />
+              {config.location}
+            </p>
+            <a className="btn" href="#projects">
+              View projects
+            </a>
+          </div>
+          <a className="scroll" href="#about" aria-label="Scroll to About">
+            ↓
+          </a>
+        </section>
 
-      <section>
-        <h2>
-          <span className="prompt">$</span> ls skills/
-        </h2>
-        <ul className="tags">
-          {config.skills.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-      </section>
+        <section id="about" className="section">
+          <Reveal>
+            <h2>About</h2>
+          </Reveal>
 
-      <section>
-        <h2>
-          <span className="prompt">$</span> git log --projetos
-        </h2>
-        <div className="grid">
-          {repos.map((r) => (
-            <article key={r.name} className="card">
-              <h3>
-                <a href={r.html_url}>{r.name}</a>
-              </h3>
-              <p>{r.description ?? "Sem descrição."}</p>
-              <footer>
-                {r.language && <span>● {r.language}</span>}
-                <span>★ {r.stargazers_count}</span>
-                {r.homepage && <a href={r.homepage}>demo ↗</a>}
-              </footer>
-            </article>
-          ))}
-        </div>
-        <p className="more">
-          <a href={config.links.github}>ver todos no GitHub →</a>
-        </p>
-      </section>
+          <div className="about">
+            <Reveal delay={80}>
+              <div className="about-text">
+                <p className="about-lead">{about.intro}</p>
+                <p>{about.journey}</p>
+
+                <h3 className="sub">{about.interestsTitle}</h3>
+                <ul className="interests">
+                  {about.interests.map((i) => (
+                    <li key={i}>{i}</li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+
+            <Reveal delay={160}>
+              <div className="side">
+                <div className="skill-groups">
+                  <h3>Technologies</h3>
+                  {config.skillGroups.map((g) => (
+                    <div key={g.title} className="skill-group">
+                      <span className="skill-title">{g.title}</span>
+                      <ul className="skills">
+                        {g.items.map((s) => (
+                          <li key={s}>{s}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </Reveal>
+          </div>
+
+          <Reveal>
+            <div className="facts">
+              <h3 className="sub">{about.factsTitle}</h3>
+              <ul>
+                {about.facts.map((f) => (
+                  <li key={f}>{f}</li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <div className="philosophy">
+              <span className="skill-title">{about.philosophyTitle}</span>
+              <p>{about.philosophy}</p>
+              <p className="motto">
+                {about.motto.map((m) => (
+                  <span key={m}>{m}</span>
+                ))}
+              </p>
+            </div>
+          </Reveal>
+        </section>
+
+        <Divider />
+
+        <section id="projects" className="section projects">
+          <Reveal>
+            <h2>Projects</h2>
+          </Reveal>
+          <div className="project-list">
+            {projects.map((p, i) => (
+              <Reveal key={p.title} delay={i * 90} className={`pwrap p${i % 2}`}>
+                <article className="project">
+                  <span className="num">0{i + 1}</span>
+                  <h3>{p.title}</h3>
+                  <p>{p.description}</p>
+                  <ul className="stack">
+                    {p.stack.map((t) => (
+                      <li key={t}>{t}</li>
+                    ))}
+                  </ul>
+                  <div className="plinks">
+                    <a href={p.url}>Code →</a>
+                    {p.homepage && <a href={p.homepage}>Live ↗</a>}
+                    {p.stars !== null && <span>★ {p.stars}</span>}
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <Divider />
+
+        <section id="contact" className="section contact">
+          <Reveal>
+            <h2>Contact</h2>
+            <p className="lead">Let&apos;s talk?</p>
+            <div className="contact-links">
+              <a href={config.links.github}>GitHub</a>
+              <a href={config.links.linkedin}>LinkedIn</a>
+              {config.links.email && <a href={config.links.email}>Email</a>}
+            </div>
+          </Reveal>
+        </section>
+      </main>
 
       <footer className="foot">
         © {new Date().getFullYear()} {config.name}
       </footer>
-    </main>
+    </>
   );
 }
