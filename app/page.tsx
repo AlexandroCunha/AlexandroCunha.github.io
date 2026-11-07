@@ -134,8 +134,24 @@ export default async function Home() {
                     ))}
                   </ul>
                   <div className="plinks">
-                    <a href={p.url}>Code →</a>
-                    {p.homepage && <a href={p.homepage}>Live ↗</a>}
+                    {p.homepage && (
+                      <a
+                        className="plink live"
+                        href={p.homepage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Live demo ↗
+                      </a>
+                    )}
+                    <a
+                      className="plink"
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Code →
+                    </a>
                     {p.stars !== null && <span>★ {p.stars}</span>}
                   </div>
                 </article>

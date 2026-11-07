@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Fraunces, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { config } from "@/lib/config";
@@ -17,6 +17,12 @@ const body = DM_Sans({
 export const metadata: Metadata = {
   title: `${config.name} | ${config.role}`,
   description: `${config.name}: ${config.role}, ${config.headline}.`,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#cfe3f7",
 };
 
 export default function RootLayout({
