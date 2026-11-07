@@ -172,8 +172,6 @@ h1, h2, h3 { font-family: var(--font-display), serif; font-weight: 500; line-hei
 .divider path { fill: none; stroke: var(--blue); stroke-width: 1.5; opacity: .45; vector-effect: non-scaling-stroke; }
 
 /* cartão de projeto inteiro clicável */
-.plinks a:first-child::after { content: ""; position: absolute; inset: 0; }
-.plinks a:not(:first-child) { position: relative; z-index: 1; }
 .project { cursor: pointer; }
 
 /* indicador de rolagem no topo */
@@ -200,7 +198,13 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; border-ra
 .plink:hover { background: var(--blue); color: var(--white); text-decoration: none !important; }
 .plink.live { background: var(--blue-deep); border-color: var(--blue-deep); color: var(--white); }
 .plink.live:hover { background: var(--blue); border-color: var(--blue); }
-.plinks a.plink:not(:first-child) { position: relative; z-index: 1; }
+.plink { position: relative; z-index: 1; }
+.plink.main { position: static; z-index: auto; }
+.plink.main::after { content: ""; position: absolute; inset: 0; }
+.plink.soon {
+  background: transparent; border-style: dashed; border-color: var(--muted); color: var(--muted);
+  cursor: default; pointer-events: none;
+}
 
 /* base mobile */
 html { -webkit-text-size-adjust: 100%; }

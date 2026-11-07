@@ -134,18 +134,22 @@ export default async function Home() {
                     ))}
                   </ul>
                   <div className="plinks">
-                    {p.homepage && (
+                    {p.homepage ? (
                       <a
-                        className="plink live"
+                        className="plink live main"
                         href={p.homepage}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         Live demo ↗
                       </a>
+                    ) : (
+                      <span className="plink soon" aria-disabled="true">
+                        Live demo · coming soon
+                      </span>
                     )}
                     <a
-                      className="plink"
+                      className={`plink${p.homepage ? "" : " main"}`}
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
