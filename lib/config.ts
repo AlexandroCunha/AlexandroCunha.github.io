@@ -64,6 +64,7 @@ export const config = {
         "Multi-tenant online booking for barbershops: each shop gets its own website, booking calendar and owner area. GDPR-minded, with data retention and strict security headers.",
       stack: ["TypeScript", "Express", "React", "PostgreSQL"],
       url: "https://github.com/AlexandroCunha/barbershop-platform",
+      homepage: "https://www.trimly.software",
     },
     {
       match: "financify",
