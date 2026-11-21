@@ -12,6 +12,47 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n));
 export default function ScrollFX() {
   const bar = useRef<HTMLSpanElement>(null);
 
+  // Safari tints its bars (top, bottom, or the side bar of the iPhone Duo) with the page's theme colour.
+  // Keep that colour equal to the section under the top edge, so the page always reads edge to edge.
+  useEffect(() => {
+    const meta =
+      document.querySelector<HTMLMetaElement>('meta[name="theme-color"]') ??
+      document.head.appendChild(Object.assign(document.createElement("meta"), { name: "theme-color" }));
+    let last = "";
+    let frame = 0;
+
+    const solid = (el: Element | null): string => {
+      for (let n = el; n; n = n.parentElement) {
+        const bg = getComputedStyle(n).backgroundColor;
+        if (bg && bg !== "transparent" && !/rgba\(.*,\s*0\)$/.test(bg)) return bg;
+      }
+      return getComputedStyle(document.body).backgroundColor;
+    };
+
+    const paint = () => {
+      frame = 0;
+      const el = document.elementFromPoint(Math.min(24, window.innerWidth / 2), 2);
+      const color = solid(el);
+      if (color !== last) {
+        last = color;
+        meta.content = color;
+        document.documentElement.style.backgroundColor = color;
+      }
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    paint();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
