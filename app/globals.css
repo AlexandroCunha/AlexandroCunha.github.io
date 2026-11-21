@@ -613,9 +613,25 @@ a:focus-visible {
   opacity: clamp(0, calc(var(--e) * 2 - 0.4), 1);
 }
 
+/* "Reduce Motion" on: things still appear as you scroll, but nothing slides, grows or flies in. */
 @media (prefers-reduced-motion: reduce) {
-  .progress {
-    display: none;
+  .hero-main,
+  .l-tower,
+  .l-slab,
+  .l-pilotis,
+  .l-wing,
+  .l-steps,
+  .about h2,
+  .work-title,
+  .contact h2,
+  .rows li,
+  .tech > div,
+  .slab .frame.phone {
+    transform: none;
+  }
+
+  .sun {
+    transform: translateY(calc(var(--h) * -150px));
   }
 }
 

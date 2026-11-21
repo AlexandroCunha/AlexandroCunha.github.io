@@ -7,7 +7,7 @@ const clamp = (n: number) => Math.min(1, Math.max(0, n));
 /**
  * Scroll-linked motion. Every `[data-fx]` element gets `--e` (0 → 1 as it enters the screen),
  * `[data-fx-t]` gets `--t` (0 → 1 as it travels up the screen), the hero gets `--h` (0 → 1 as you scroll past it), and an ochre bar shows how far down the page you are.
- * The CSS decides what each value moves. With reduced motion nothing runs and everything stays in place.
+ * The CSS decides what each value moves. With reduced motion the CSS keeps only reveals, fills and colour, and drops the big movements.
  */
 export default function ScrollFX() {
   const bar = useRef<HTMLSpanElement>(null);
@@ -53,9 +53,8 @@ export default function ScrollFX() {
     };
   }, []);
 
+  // Runs with "Reduce Motion" on too: the CSS then keeps the reveals and drops the big movements.
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-fx]"));
     const through = Array.from(document.querySelectorAll<HTMLElement>("[data-fx-t]"));
     const hero = document.querySelector<HTMLElement>(".hero");
