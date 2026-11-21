@@ -25,6 +25,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover", // lets the page reach the edges; the padding keeps clear of the notch
   themeColor: "#cbcfce",
 };
 

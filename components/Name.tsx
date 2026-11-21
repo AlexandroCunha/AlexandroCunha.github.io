@@ -15,7 +15,8 @@ export default function Name({ first, last }: { first: string; last: string }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const fine = window.matchMedia("(pointer: fine)").matches;
-    let target = 0.45;
+    // pointer: starts in the middle; touch: starts at full width and squeezes as you scroll
+    let target = fine ? 0.45 : 1;
     let current = target;
     let frame = 0;
 
@@ -33,7 +34,7 @@ export default function Name({ first, last }: { first: string; last: string }) {
       go();
     };
     const onScroll = () => {
-      target = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
+      target = 1 - Math.min(1, window.scrollY / (window.innerHeight * 0.9));
       go();
     };
 

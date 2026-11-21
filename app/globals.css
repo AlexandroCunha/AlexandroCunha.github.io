@@ -9,7 +9,7 @@
   --slate-2: #2c3a44;
   --stone: #7f8a8e;
   --ochre: #e8a23a;
-  --pad: clamp(20px, 4vw, 56px);
+  --pad: max(clamp(20px, 4vw, 56px), env(safe-area-inset-left), env(safe-area-inset-right));
 }
 
 *,
@@ -662,4 +662,378 @@ a:focus-visible {
 /* the ground of the drawing is the same line as the rows of the lists beside it */
 .dusk-ground {
   fill: #3d4c56;
+}
+
+/* =====================================================================
+   Devices. Nothing detects the device: each layout follows the size,
+   shape and pointer of the window.
+   ===================================================================== */
+
+/* ---------- Phones, upright (and the iPhone Duo outer display) ---------- */
+
+@media (max-width: 639px) {
+  .nav {
+    height: 56px;
+  }
+
+  .hero-main {
+    flex: 1;
+    align-content: end;
+    gap: 18px;
+    padding-top: 16px;
+    padding-bottom: 28px;
+  }
+
+  /* the name fills the width of the screen, whatever the phone */
+  .name {
+    font-size: calc((100vw - 2 * var(--pad)) / 6.3);
+  }
+
+  .hero-side {
+    gap: 12px;
+  }
+
+  .tagline {
+    font-size: 1.3rem;
+  }
+
+  /* a fixed slice of the drawing, so the sun and the tower always show */
+  .art {
+    flex: none;
+    height: min(78vw, 36svh);
+    min-height: 0;
+  }
+
+  .about h2,
+  .work-title,
+  h2 {
+    font-size: 3.4rem;
+  }
+
+  .contact h2 {
+    font-size: calc((100vw - 2 * var(--pad)) / 4.1);
+  }
+
+  .slab {
+    gap: 24px;
+    padding-block: 56px;
+  }
+
+  .slab h3 {
+    font-size: 2.6rem;
+  }
+
+  .links .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
+  .contact-links {
+    gap: 16px 28px;
+  }
+
+  .contact-links a {
+    font-size: 1.7rem;
+  }
+
+  .foot {
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
+}
+
+/* Short upright phones: iPhone Duo outer display (382 x 580), iPhone SE */
+@media (max-width: 480px) and (max-height: 680px) and (orientation: portrait) {
+  .nav {
+    height: 48px;
+  }
+
+  .hero-main {
+    gap: 12px;
+    padding-bottom: 20px;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+  }
+
+  .where {
+    display: none;
+  }
+
+  .btn {
+    min-height: 44px;
+    padding: 0 18px;
+  }
+
+  .art {
+    height: 30svh;
+  }
+
+  .slab {
+    padding-block: 44px;
+  }
+
+  .slab h3 {
+    font-size: 2.2rem;
+  }
+}
+
+/* ---------- Tablets upright, and the iPhone Duo inner display (669 x 867) ---------- */
+
+@media (min-width: 640px) and (max-width: 1199px) and (orientation: portrait) {
+  .hero-main {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 28px 32px;
+    padding-top: 24px;
+  }
+
+  .name {
+    grid-column: 1 / -1;
+    font-size: calc((100vw - 2 * var(--pad)) / 6.3);
+  }
+
+  /* tagline on the left, location and button on the right, under the name */
+  .hero-side {
+    display: contents;
+  }
+
+  .tagline {
+    max-width: 20em;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+  }
+
+  .where {
+    display: none;
+  }
+
+  .hero-side .btn {
+    justify-self: end;
+  }
+
+  /* the hero ends where the building ends, instead of stretching to the full height of the tablet */
+  .hero {
+    min-height: 0;
+  }
+
+  .hero-main {
+    padding-top: clamp(48px, 9vw, 96px);
+    padding-bottom: clamp(40px, 7vw, 72px);
+  }
+
+  .art {
+    flex: none;
+    height: 46vw;
+    min-height: 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  /* technologies on the left, the dusk drawing standing on the same line on the right */
+  .about-side {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: 40px;
+    align-items: end;
+  }
+
+  .about-side h3 {
+    grid-column: 1 / -1;
+  }
+
+  .dusk {
+    flex: none;
+    height: auto;
+    max-width: none;
+    padding-top: 0;
+  }
+
+  .rows {
+    columns: 2;
+    column-gap: 40px;
+  }
+
+  .rows li {
+    break-inside: avoid;
+  }
+
+  /* each project: title on the left, words on the right, the screens full width below */
+  .slab,
+  .slab:nth-of-type(even) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-block: 80px;
+  }
+
+  .slab:nth-of-type(even) .slab-text {
+    order: 0;
+  }
+
+  .slab-text {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  .slab-text h3,
+  .slab-text .kind {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .slab-text .desc,
+  .slab-text .stack,
+  .slab-text .links {
+    grid-column: 2;
+  }
+
+  .slab-text .desc {
+    grid-row: 1 / span 2;
+    margin-top: 0.2em;
+  }
+
+  .slab-text .stack {
+    grid-row: 3;
+  }
+
+  .slab-text .links {
+    grid-row: 4;
+  }
+
+  .slab h3 {
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+  }
+
+  .frame.phone {
+    width: 22%;
+  }
+}
+
+/* ---------- Opened like a book: iPhone Duo inner display sideways (951 x 585),
+   the outer display sideways (594 x 368), and phones held sideways.
+   Two pages, with the gutter on the fold. ---------- */
+
+@media (orientation: landscape) and (max-height: 700px) and (min-width: 560px) and (max-width: 1023px) {
+  :root {
+    --gutter: clamp(48px, 7vw, 96px);
+  }
+
+  .nav {
+    height: 48px;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    column-gap: var(--gutter);
+    min-height: 100svh;
+  }
+
+  .nav {
+    grid-column: 1 / -1;
+  }
+
+  .hero-main {
+    grid-template-columns: 1fr;
+    align-content: end;
+    gap: 14px;
+    padding: 12px 0 24px var(--pad);
+    transform: none;
+  }
+
+  .name {
+    font-size: calc((50vw - var(--gutter) / 2 - var(--pad)) / 6.3);
+  }
+
+  .tagline {
+    font-size: clamp(1rem, 2.2vw, 1.4rem);
+  }
+
+  .where {
+    display: none;
+  }
+
+  /* the building stands alone on the right page, framed wide enough to keep the sun whole */
+  .art {
+    align-self: end;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 5 / 4;
+    margin: 0;
+  }
+
+  .about {
+    padding-block: 56px;
+  }
+
+  .about-grid,
+  .slab,
+  .slab:nth-of-type(even) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--gutter);
+  }
+
+  .slab,
+  .slab:nth-of-type(even) {
+    align-items: start;
+    padding-block: 48px;
+  }
+
+  .slab:nth-of-type(even) .slab-text {
+    order: 0;
+  }
+
+  .slab h3 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+  }
+
+  .dusk {
+    max-width: 260px;
+  }
+
+  .philosophy {
+    max-width: none;
+    width: calc(50% - var(--gutter) / 2);
+  }
+
+  .contact {
+    padding-block: 56px;
+  }
+
+  .contact h2 {
+    font-size: clamp(2.8rem, 10vw, 7rem);
+  }
+}
+
+/* The Duo's fold is drawn into the gutter when Safari's viewport segments are on */
+@media (horizontal-viewport-segments: 2) {
+  :root {
+    --gutter: max(64px, calc(env(viewport-segment-left 1 0, 0px) - env(viewport-segment-right 0 0, 0px) + 48px));
+  }
+}
+
+/* Touch screens: no hover colour left behind after a tap */
+@media (hover: none) {
+  .btn:hover {
+    border-color: var(--slate);
+    background: var(--slate);
+    color: var(--light);
+  }
+
+  .btn.alt:hover,
+  .btn.soon:hover {
+    background: transparent;
+    color: var(--slate);
+  }
+
+  .btn.soon:hover {
+    color: #3c4950;
+  }
 }
