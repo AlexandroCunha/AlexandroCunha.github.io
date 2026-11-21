@@ -63,16 +63,21 @@ export default function ScrollFX() {
     const run = () => {
       frame = 0;
       const vh = window.innerHeight;
+      const room = Math.max(0, document.documentElement.scrollHeight - vh);
       for (const el of els) {
         const top = el.getBoundingClientRect().top;
-        el.style.setProperty("--e", clamp((vh * 0.95 - top) / (vh * 0.55)).toFixed(3));
+        // An element near the end of the page can never climb to 40% of the screen,
+        // so its entrance finishes where it stops when the page is scrolled to the bottom.
+        const lowest = top + (room - window.scrollY);
+        const end = Math.max(vh * 0.4, lowest);
+        const start = Math.max(vh * 0.95, end + 1);
+        el.style.setProperty("--e", clamp((start - top) / (start - end)).toFixed(3));
       }
       for (const el of through) {
         const top = el.getBoundingClientRect().top;
         el.style.setProperty("--t", clamp((vh * 0.85 - top) / (vh * 0.65)).toFixed(3));
       }
       if (hero) hero.style.setProperty("--h", clamp(window.scrollY / hero.offsetHeight).toFixed(3));
-      const room = document.documentElement.scrollHeight - vh;
       if (bar.current) {
         bar.current.style.transform = `scaleX(${room > 0 ? clamp(window.scrollY / room) : 0})`;
       }

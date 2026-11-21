@@ -31,10 +31,12 @@ export const config = {
   tagline: "I build backend systems and the web apps around them.",
   location: "Dublin, Ireland",
   about: {
-    intro: "I'm a backend developer from Brazil, based in Dublin.",
+    headline: "Building software with purpose.",
+    intro:
+      "I’m a Brazilian software developer based in Dublin, specialising in backend development and building reliable, scalable web applications.",
     journey:
-      "I came to software from education: a degree in Pedagogy, then Backend Development at Cubos Academy. That mix shapes how I work. I break problems down and explain them clearly.",
-    now: "Today I build full-stack products, from the database to the interface, with tests, CI and care for security and privacy.",
+      "I work across the full development lifecycle, from designing RESTful APIs with Node.js and TypeScript to modelling data with PostgreSQL and building intuitive interfaces with React. I also focus on automated testing, CI/CD, and integrating security and privacy into every stage of development.",
+    now: "With a degree in Pedagogy and a background in Backend Development from Cubos Academy, I bring a different perspective to software engineering. I value clear communication, thoughtful architecture, well-documented code, and solutions that are built to be understood, maintained, and improved.",
     interestsTitle: "Interested in",
     interests: [
       "Software development",

@@ -185,7 +185,8 @@ export default async function Home() {
           <h2 data-fx>About</h2>
           <div className="about-grid">
             <div className="about-text">
-              <p className="about-lead">{about.intro}</p>
+              <p className="about-lead">{about.headline}</p>
+              <p>{about.intro}</p>
               <p>{about.journey}</p>
               <p>{about.now}</p>
               <h3>{about.interestsTitle}</h3>
@@ -249,7 +250,6 @@ export default async function Home() {
           © {new Date().getFullYear()} {config.name}
         </span>
         <span>{config.location}</span>
-        <span>Built with Next.js</span>
       </footer>
     </>
   );

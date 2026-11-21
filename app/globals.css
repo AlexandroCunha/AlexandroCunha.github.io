@@ -425,9 +425,6 @@ a:focus-visible {
   text-underline-offset: 8px;
 }
 
-.contact-links a[href^="mailto:"] {
-  font-size: clamp(1.2rem, 5.6vw, 3rem);
-}
 
 .contact-links a:hover {
   background: var(--slate);
@@ -727,7 +724,7 @@ a:focus-visible {
   }
 
   .contact h2 {
-    font-size: calc((100vw - 2 * var(--pad)) / 4.1);
+    font-size: calc((100vw - 2 * var(--pad)) / 4.7);
   }
 
   .slab {
@@ -878,7 +875,7 @@ a:focus-visible {
     break-inside: avoid;
   }
 
-  /* each project: title on the left, words on the right, the screens full width below */
+  /* each project: words first, the screens full width below */
   .slab,
   .slab:nth-of-type(even) {
     grid-template-columns: 1fr;
@@ -890,36 +887,8 @@ a:focus-visible {
     order: 0;
   }
 
-  .slab-text {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-    column-gap: 40px;
-    align-items: start;
-  }
-
-  .slab-text h3,
-  .slab-text .kind {
-    grid-column: 1;
-    justify-self: start;
-  }
-
-  .slab-text .desc,
-  .slab-text .stack,
-  .slab-text .links {
-    grid-column: 2;
-  }
-
   .slab-text .desc {
-    grid-row: 1 / span 2;
-    margin-top: 0.2em;
-  }
-
-  .slab-text .stack {
-    grid-row: 3;
-  }
-
-  .slab-text .links {
-    grid-row: 4;
+    max-width: 34em;
   }
 
   .slab h3 {
