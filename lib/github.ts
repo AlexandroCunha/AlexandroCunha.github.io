@@ -11,11 +11,13 @@ type Repo = {
 
 export type Project = {
   title: string;
+  kind: string;
   description: string;
   stack: string[];
   url: string;
   homepage?: string;
   stars: number | null;
+  shots?: FeaturedProject["shots"];
 };
 
 async function fetchRepos(): Promise<Repo[]> {
@@ -44,12 +46,14 @@ function resolve(p: FeaturedProject, repos: Repo[]): Project {
   );
   return {
     title: p.title,
+    kind: p.kind,
     description: p.description, // texto do config (mantém o site em inglês)
     stack: p.stack,
     url: repo?.html_url ?? p.url,
     // config wins over the GitHub "Website" field, which may be outdated
     homepage: p.homepage || repo?.homepage || undefined,
     stars: repo ? repo.stargazers_count : null,
+    shots: p.shots,
   };
 }
 

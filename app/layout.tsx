@@ -1,28 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, DM_Sans } from "next/font/google";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { config } from "@/lib/config";
 
-const display = Fraunces({
+// One family does everything: Archivo has a width axis, so the same letters can be
+// squeezed for body text and stretched for the huge headings.
+const display = Archivo({
   subsets: ["latin"],
+  axes: ["wdth"],
   variable: "--font-display",
   display: "swap",
 });
-const body = DM_Sans({
+const mono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-body",
+  variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: `${config.name} | ${config.role}`,
-  description: `${config.name}: ${config.role}, ${config.headline}.`,
+  description: `${config.name}, ${config.role}. ${config.tagline}`,
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#cfe3f7",
+  themeColor: "#cbcfce",
 };
 
 export default function RootLayout({
@@ -32,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable}`}>{children}</body>
+      <body className={`${display.variable} ${mono.variable}`}>{children}</body>
     </html>
   );
 }

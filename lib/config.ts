@@ -1,8 +1,18 @@
 // Edit here: this is the only file with your personal data.
+export type Shot = {
+  /** Path under /public. */
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
 export type FeaturedProject = {
   /** Part of the GitHub repository name (case-insensitive). */
   match: string;
   title: string;
+  /** Short label shown under the title, e.g. "Web platform". */
+  kind: string;
   /** Used if the repository is private or has no description. */
   description: string;
   stack: string[];
@@ -10,77 +20,113 @@ export type FeaturedProject = {
   url: string;
   /** Live site address, if any. */
   homepage?: string;
+  /** Screens taken from the project README (files in /public/shots). */
+  shots?: { main: Shot; phone?: Shot; caption: string };
 };
 
 export const config = {
   githubUser: "AlexandroCunha",
-  name: "Alexandro",
+  name: "Alexandro Silva",
   role: "Software Developer",
-  headline: "Backend Development · Data Science Enthusiast",
+  tagline: "I build backend systems and the web apps around them.",
   location: "Dublin, Ireland",
   about: {
-    intro:
-      "I'm Alexandro, a Brazilian based in Dublin, Ireland, passionate about technology, problem-solving, and continuous learning.",
+    intro: "I'm a backend developer from Brazil, based in Dublin.",
     journey:
-      "My journey combines different areas of knowledge. I have a Bachelor's degree in Pedagogy and a background in Backend Development, which have helped me develop analytical thinking, creativity, and a strong ability to learn and adapt.",
-    interestsTitle: "I'm particularly interested in",
+      "I came to software from education: a degree in Pedagogy, then Backend Development at Cubos Academy. That mix shapes how I work. I break problems down and explain them clearly.",
+    now: "Today I build full-stack products, from the database to the interface, with tests, CI and care for security and privacy.",
+    interestsTitle: "Interested in",
     interests: [
-      "Software Development & Backend Engineering",
-      "Data Science & Data Analytics",
-      "Problem-solving and logical thinking",
-      "Building projects and exploring new technologies",
-      "Continuous learning and personal growth",
+      "Software development",
+      "Creative solutions",
+      "Data science and analytics",
+      "Building and shipping real products",
     ],
-    factsTitle: "A little more about me",
-    facts: [
-      "Originally from Brazil, currently living in Ireland.",
-      "Bachelor's degree in Pedagogy.",
-      "Studied Backend Development at Cubos Academy.",
-      "Always exploring new technologies and improving my programming skills.",
-      "Working towards growing my career in the tech industry.",
-    ],
-    philosophyTitle: "My philosophy",
-    philosophy:
-      "I believe technology is about more than writing code. It's about understanding problems, creating meaningful solutions, and making people's lives easier.",
-    motto: ["Always learning.", "Always building.", "Always evolving."],
+    philosophy: "Technology is about understanding problems and making people's lives easier.",
   },
+  // Taken from the code in the GitHub repositories (package.json, CI, deploy files).
   skillGroups: [
-    { title: "Languages", items: ["JavaScript", "TypeScript"] },
-    { title: "Backend", items: ["Node.js", "REST APIs"] },
+    { title: "Languages", items: ["TypeScript", "JavaScript", "SQL"] },
+    { title: "Backend", items: ["Node.js", "Express", "REST APIs", "JWT authentication"] },
     { title: "Databases", items: ["PostgreSQL"] },
+    { title: "Testing and CI", items: ["Node.js test runner", "GitHub Actions", "npm audit"] },
+    { title: "Deploy", items: ["Docker", "Render", "Vercel", "S3 storage"] },
     { title: "Tools", items: ["Git", "GitHub"] },
   ],
   links: {
     github: "https://github.com/AlexandroCunha",
     linkedin: "https://www.linkedin.com/in/alexandrocunha/",
-    email: "", // optional: "mailto:you@gmail.com" (empty = button hidden)
+    email: "mailto:alexandrocunha4@gmail.com", // empty = link hidden
   },
   // Only these projects are shown, in this order.
   projects: [
     {
       match: "barbershop-platform",
       title: "Barbershop",
+      kind: "Web platform",
       description:
         "Multi-tenant online booking for barbershops: each shop gets its own website, booking calendar and owner area. GDPR-minded, with data retention and strict security headers.",
-      stack: ["TypeScript", "Express", "React", "PostgreSQL"],
+      stack: ["TypeScript", "Node.js", "Express", "React", "PostgreSQL", "Docker"],
       url: "https://github.com/AlexandroCunha/barbershop-platform",
       homepage: "https://www.trimly.software",
+      shots: {
+        main: {
+          src: "/shots/barbershop-wide.webp",
+          width: 1280,
+          height: 860,
+          alt: "Home page of a demo barbershop website: headline, opening hours, address and a booking button.",
+        },
+        phone: {
+          src: "/shots/barbershop-phone.webp",
+          width: 480,
+          height: 1039,
+          alt: "The same barbershop website on a phone.",
+        },
+        caption: "A demo shop with sample data.",
+      },
     },
     {
       match: "financify",
       title: "Financify",
-      description: "REST API for personal finance management.",
-      stack: ["JavaScript", "Node.js", "PostgreSQL"],
+      kind: "Web app and API",
+      description:
+        "Personal finance in euros. Record income and expenses, see your balance and spot spending patterns by category and by month.",
+      stack: ["JavaScript", "Node.js", "Express", "React", "PostgreSQL", "JWT"],
       url: "https://github.com/AlexandroCunha/Financify",
+      shots: {
+        main: {
+          src: "/shots/financify-wide.webp",
+          width: 1200,
+          height: 1160,
+          alt: "Financify dashboard with balance, income and expense cards, a month-by-month chart and spending by category.",
+        },
+        caption: "The dashboard, with sample data.",
+      },
     },
     {
       match: "vocabloom",
       title: "Vocabloom",
+      kind: "Web app with AI",
       description:
         "Turns any PDF into an interactive English worksheet that students answer on their phone, with hints and corrections on mistakes.",
-      stack: ["JavaScript", "Node.js", "Claude API"],
+      stack: ["JavaScript", "Node.js", "Claude API", "Redis", "Vercel"],
       url: "https://github.com/AlexandroCunha/vocabloom",
       homepage: "https://vocabloom-esl.vercel.app",
+      shots: {
+        main: {
+          src: "/shots/vocabloom-wide.webp",
+          width: 1200,
+          height: 750,
+          alt: "Vocabloom share step: a link and QR code for the teacher, and a preview of what students see.",
+        },
+        phone: {
+          src: "/shots/vocabloom-phone.webp",
+          width: 480,
+          height: 960,
+          alt: "A Vocabloom worksheet on a phone, with a question and an answer field.",
+        },
+        caption: "Sharing a worksheet, and the student view.",
+      },
     },
   ] as FeaturedProject[],
 };
