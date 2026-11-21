@@ -292,8 +292,22 @@ a:focus-visible {
 
 /* ---------- Work ---------- */
 
+.work-meta {
+  padding: clamp(56px, 8vw, 110px) var(--pad) 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.9rem;
+}
+
 .work-title {
-  padding: clamp(56px, 8vw, 110px) var(--pad) clamp(16px, 2vw, 24px);
+  padding: 0 var(--pad);
+}
+
+.work-intro {
+  max-width: 30em;
+  padding: 18px var(--pad) clamp(16px, 2vw, 24px);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 600;
+  line-height: 1.3;
 }
 
 .slab {
@@ -1020,5 +1034,538 @@ a:focus-visible {
 
   .btn.soon:hover {
     color: #3c4950;
+  }
+}
+
+/* Contact: one line for whoever is reading, one clear button, the other links below */
+.contact-lead {
+  max-width: 24em;
+  margin-top: clamp(20px, 3vw, 36px);
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.contact-cta {
+  margin-top: clamp(24px, 3vw, 36px);
+  min-height: 56px;
+  padding: 0 32px;
+  font-size: 1.1rem;
+}
+
+@media (hover: hover) {
+  .contact-cta:hover {
+    border-color: var(--slate);
+    background: var(--light);
+    color: var(--slate);
+  }
+}
+
+.contact-links a {
+  font-size: clamp(1.3rem, 2.6vw, 2rem);
+}
+
+/* ---------- Skip link: hidden until it gets keyboard focus ---------- */
+
+.skip {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 30;
+  padding: 10px 16px;
+  background: var(--slate);
+  color: var(--light);
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-160%);
+}
+
+.skip:focus-visible {
+  transform: none;
+}
+
+/* ---------- Project index ---------- */
+
+.index {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: clamp(28px, 4vw, 48px) var(--pad) 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--slate);
+}
+
+.index li + li {
+  border-left: 1px solid var(--stone);
+}
+
+.index a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  padding: 18px 20px 22px;
+  text-decoration: none;
+}
+
+.index li:first-child a {
+  padding-left: 0;
+}
+
+.index-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.index-summary {
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.index-status {
+  margin-top: auto;
+  padding-top: 10px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.82rem;
+}
+
+.index-status.live::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--ochre);
+  box-shadow: 0 0 0 2px var(--slate);
+  vertical-align: 1px;
+}
+
+.index-open {
+  background: var(--slate);
+  color: var(--light);
+}
+
+.index li:last-child a.index-open {
+  padding-left: 20px;
+}
+
+@media (hover: hover) {
+  .index a:hover .index-name {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--ochre);
+    text-underline-offset: 5px;
+  }
+}
+
+@media (max-width: 900px) {
+  .index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .index li:nth-child(3) {
+    border-left: 0;
+  }
+
+  .index li:nth-child(n + 3) {
+    border-top: 1px solid var(--stone);
+  }
+
+  .index li:nth-child(3) a {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .index {
+    grid-template-columns: 1fr;
+  }
+
+  .index li + li {
+    border-left: 0;
+    border-top: 1px solid var(--stone);
+  }
+
+  .index a,
+  .index li:last-child a.index-open {
+    padding: 16px 0 18px;
+  }
+
+  .index li:last-child a.index-open {
+    padding-inline: 16px;
+  }
+}
+
+/* ---------- Project spec sheet ---------- */
+
+.spec {
+  margin: 1.2em 0 0;
+  border-top: 1px solid var(--stone);
+}
+
+.spec > div {
+  display: grid;
+  grid-template-columns: 7.5em minmax(0, 1fr);
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--stone);
+  font-size: 0.92rem;
+}
+
+.spec dt {
+  font-weight: 700;
+}
+
+.spec dd {
+  margin: 0;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+/* ---------- API console ---------- */
+
+.api {
+  order: 3;
+  grid-column: 1 / -1;
+  margin-top: clamp(8px, 2vw, 24px);
+  border: 2px solid var(--slate);
+  background: var(--slate);
+  color: var(--light);
+}
+
+.api-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 24px;
+  padding: 16px 20px 0;
+}
+
+.api-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.api-note {
+  color: #a9b3b6;
+  font-size: 0.85rem;
+}
+
+.api-calls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #3d4c56;
+}
+
+.api-call {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid #5b6a73;
+  background: transparent;
+  color: var(--light);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.api-call[aria-pressed="true"] {
+  border-color: var(--ochre);
+  background: var(--ochre);
+  color: var(--slate);
+}
+
+.api-call:focus-visible {
+  outline: 3px solid var(--ochre);
+  outline-offset: 2px;
+}
+
+.api-console {
+  padding: 16px 20px 20px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.api-req {
+  overflow-wrap: anywhere;
+}
+
+.api-method {
+  color: var(--ochre);
+  font-weight: 700;
+}
+
+.api-body {
+  margin-top: 4px;
+  color: #a9b3b6;
+  overflow-wrap: anywhere;
+}
+
+.api-status {
+  margin-top: 10px;
+  color: #9fd3a8;
+}
+
+.api-status.bad {
+  color: #f2a8a0;
+}
+
+.api-res {
+  min-height: 14em;
+  max-height: 24em;
+  margin: 8px 0 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font: inherit;
+}
+
+@media (hover: hover) {
+  .api-call:not([aria-pressed="true"]):hover {
+    border-color: var(--light);
+  }
+}
+
+/* ---------- Contact form (opens the visitor's email app; nothing is stored) ---------- */
+
+.cf {
+  display: grid;
+  gap: 14px;
+  max-width: 640px;
+  margin-top: clamp(24px, 3vw, 40px);
+}
+
+.cf-kinds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.cf-kinds legend {
+  width: 100%;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.cf-kind {
+  position: relative;
+  cursor: pointer;
+}
+
+.cf-kind input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cf-kind span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid var(--slate);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.cf-kind input:checked + span {
+  background: var(--slate);
+  color: var(--ochre);
+}
+
+.cf-kind input:focus-visible + span {
+  outline: 3px solid var(--slate);
+  outline-offset: 3px;
+}
+
+.cf-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cf-field {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+
+.cf-field label {
+  font-weight: 700;
+}
+
+.cf-optional {
+  margin-left: 6px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.cf input[type="text"],
+.cf input[type="email"],
+.cf select,
+.cf textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 2px solid var(--slate);
+  border-radius: 0;
+  background: #f6f2e8;
+  color: var(--slate);
+  font: inherit;
+  font-size: 1rem; /* 16px or more: Safari on iPhone doesn't zoom in on focus */
+}
+
+.cf textarea {
+  min-height: 96px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.cf input:focus-visible,
+.cf select:focus-visible,
+.cf textarea:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 2px;
+}
+
+.cf [aria-invalid="true"] {
+  border-color: #7a1f12;
+  box-shadow: inset 4px 0 0 #7a1f12;
+}
+
+.cf-error {
+  color: #7a1f12;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.cf-hint {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8rem;
+  text-align: right;
+}
+
+.cf-send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.cf-send .contact-cta {
+  margin-top: 0;
+}
+
+.cf-note {
+  max-width: 26em;
+  font-size: 0.9rem;
+}
+
+.cf-sent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 14px 16px;
+  border-left: 6px solid var(--slate);
+  background: rgba(246, 242, 232, 0.55);
+  font-size: 0.95rem;
+}
+
+.cf-sent p {
+  flex: 1 1 20em;
+}
+
+@media (max-width: 639px) {
+  .cf-row {
+    grid-template-columns: 1fr;
+  }
+
+  .cf-send .contact-cta {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+/* the two choices sit on one line with their label */
+.cf-kinds {
+  align-items: center;
+}
+
+.cf-kinds .cf-legend {
+  float: left;
+  width: auto;
+  margin: 0 8px 0 0;
+}
+
+.cf-kind span {
+  min-height: 40px;
+  padding: 0 14px;
+}
+
+@media (max-width: 639px) {
+  .cf-kinds .cf-legend {
+    float: none;
+    width: 100%;
+    margin: 0 0 6px;
+  }
+
+  .cf-kind {
+    flex: 1 1 0;
+  }
+
+  .cf-kind span {
+    justify-content: center;
+    width: 100%;
+    padding: 0 8px;
+    text-align: center;
+  }
+}
+
+/* Contact on wider screens: the title across the top, the invitation and links on the left,
+   the form on the right, so the section is filled edge to edge. */
+@media (min-width: 901px) {
+  .contact {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: clamp(40px, 6vw, 112px);
+  }
+
+  .contact h2 {
+    grid-column: 1 / -1;
+  }
+
+  .contact-lead {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: clamp(32px, 4vw, 56px);
+    font-size: clamp(1.4rem, 2.4vw, 2.2rem);
+    line-height: 1.2;
+  }
+
+  .contact-links {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: end;
+    flex-direction: column;
+    gap: 14px;
+    margin: 32px 0 0;
+  }
+
+  .contact .cf {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    max-width: none;
+    margin-top: clamp(32px, 4vw, 56px);
   }
 }

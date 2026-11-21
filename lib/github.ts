@@ -18,6 +18,10 @@ export type Project = {
   homepage?: string;
   stars: number | null;
   shots?: FeaturedProject["shots"];
+  id: string;
+  summary: string;
+  status: string;
+  apiDemo?: boolean;
 };
 
 async function fetchRepos(): Promise<Repo[]> {
@@ -54,6 +58,10 @@ function resolve(p: FeaturedProject, repos: Repo[]): Project {
     homepage: p.homepage || repo?.homepage || undefined,
     stars: repo ? repo.stargazers_count : null,
     shots: p.shots,
+    id: p.id,
+    summary: p.summary,
+    status: p.status,
+    apiDemo: p.apiDemo,
   };
 }
 

@@ -20,6 +20,14 @@ export type FeaturedProject = {
   url: string;
   /** Live site address, if any. */
   homepage?: string;
+  /** Anchor id, used by the project index. */
+  id: string;
+  /** One line for the project index. */
+  summary: string;
+  /** "Live" or "Not deployed yet". */
+  status: string;
+  /** Show the interactive API console under this project. */
+  apiDemo?: boolean;
   /** Screens taken from the project README (files in /public/shots). */
   shots?: { main: Shot; phone?: Shot; caption: string };
 };
@@ -63,8 +71,39 @@ export const config = {
   // Only these projects are shown, in this order.
   projects: [
     {
+      match: "vocabloom",
+      title: "Vocabloom",
+      id: "vocabloom",
+      summary: "PDF worksheets, made interactive.",
+      status: "Live",
+      kind: "Web app with AI",
+      description:
+        "Turns any PDF into an interactive English worksheet that students answer on their phone, with hints and corrections on mistakes.",
+      stack: ["JavaScript", "Node.js", "Claude API", "Redis", "Vercel"],
+      url: "https://github.com/AlexandroCunha/vocabloom",
+      homepage: "https://vocabloom-esl.vercel.app",
+      shots: {
+        main: {
+          src: "/shots/vocabloom-wide.webp",
+          width: 1200,
+          height: 750,
+          alt: "Vocabloom share step: a link and QR code for the teacher, and a preview of what students see.",
+        },
+        phone: {
+          src: "/shots/vocabloom-phone.webp",
+          width: 480,
+          height: 960,
+          alt: "A Vocabloom worksheet on a phone, with a question and an answer field.",
+        },
+        caption: "Sharing a worksheet, and the student view.",
+      },
+    },
+    {
       match: "barbershop-platform",
       title: "Barbershop",
+      id: "barbershop",
+      summary: "Online booking for barbershops.",
+      status: "Live",
       kind: "Web platform",
       description:
         "Multi-tenant online booking for barbershops: each shop gets its own website, booking calendar and owner area. GDPR-minded, with data retention and strict security headers.",
@@ -90,6 +129,10 @@ export const config = {
     {
       match: "financify",
       title: "Financify",
+      id: "financify",
+      summary: "Personal finance, web app and API.",
+      status: "Not deployed yet",
+      apiDemo: true,
       kind: "Web app and API",
       description:
         "Personal finance in euros. Record income and expenses, see your balance and spot spending patterns by category and by month.",
@@ -103,31 +146,6 @@ export const config = {
           alt: "Financify dashboard with balance, income and expense cards, a month-by-month chart and spending by category.",
         },
         caption: "The dashboard, with sample data.",
-      },
-    },
-    {
-      match: "vocabloom",
-      title: "Vocabloom",
-      kind: "Web app with AI",
-      description:
-        "Turns any PDF into an interactive English worksheet that students answer on their phone, with hints and corrections on mistakes.",
-      stack: ["JavaScript", "Node.js", "Claude API", "Redis", "Vercel"],
-      url: "https://github.com/AlexandroCunha/vocabloom",
-      homepage: "https://vocabloom-esl.vercel.app",
-      shots: {
-        main: {
-          src: "/shots/vocabloom-wide.webp",
-          width: 1200,
-          height: 750,
-          alt: "Vocabloom share step: a link and QR code for the teacher, and a preview of what students see.",
-        },
-        phone: {
-          src: "/shots/vocabloom-phone.webp",
-          width: 480,
-          height: 960,
-          alt: "A Vocabloom worksheet on a phone, with a question and an answer field.",
-        },
-        caption: "Sharing a worksheet, and the student view.",
       },
     },
   ] as FeaturedProject[],

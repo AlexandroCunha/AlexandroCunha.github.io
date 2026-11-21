@@ -2,6 +2,9 @@ import { config } from "@/lib/config";
 import { getProjects, type Project } from "@/lib/github";
 import Name from "@/components/Name";
 import ScrollFX from "@/components/ScrollFX";
+import ApiDemo from "@/components/ApiDemo";
+import Clock from "@/components/Clock";
+import ContactForm from "@/components/ContactForm";
 
 const idx = (i: number) => ({ "--i": i }) as React.CSSProperties;
 
@@ -88,12 +91,25 @@ function Dusk() {
 function Slab({ p }: { p: Project }) {
   const { shots } = p;
   return (
-    <article className="slab" data-fx>
+    <article className="slab" id={p.id} data-fx>
       <div className="slab-text">
         <h3>{p.title}</h3>
         <p className="kind">{p.kind}</p>
         <p className="desc">{p.description}</p>
-        <p className="stack">{p.stack.join(" / ")}</p>
+        <dl className="spec">
+          <div>
+            <dt>Status</dt>
+            <dd>{p.status}</dd>
+          </div>
+          <div>
+            <dt>Built with</dt>
+            <dd>{p.stack.join(", ")}</dd>
+          </div>
+          <div>
+            <dt>Tested</dt>
+            <dd>Automated tests on every pull request (GitHub Actions)</dd>
+          </div>
+        </dl>
         <div className="links">
           {p.homepage ? (
             <a className="btn" href={p.homepage} target="_blank" rel="noopener noreferrer">
@@ -142,6 +158,8 @@ function Slab({ p }: { p: Project }) {
           <figcaption>{shots.caption}</figcaption>
         </figure>
       )}
+
+      {p.apiDemo && <ApiDemo />}
     </article>
   );
 }
@@ -153,6 +171,9 @@ export default async function Home() {
 
   return (
     <>
+      <a className="skip" href="#work">
+        Skip to the work
+      </a>
       <ScrollFX />
       <main>
         <section id="top" className="hero">
@@ -171,7 +192,7 @@ export default async function Home() {
             <Name first={first} last={rest.join(" ")} />
             <div className="hero-side">
               <p className="tagline">{config.tagline}</p>
-              <p className="where">{config.location}</p>
+              <Clock place={config.location} timeZone="Europe/Dublin" />
               <a className="btn" href="#work">
                 See my work
               </a>
@@ -215,9 +236,31 @@ export default async function Home() {
         </section>
 
         <section id="work" className="work">
+          <p className="work-meta">
+            {projects.length} products · {projects.filter((p) => p.homepage).length} live · all tested in CI
+          </p>
           <h2 className="work-title" data-fx>
             Work
           </h2>
+          <p className="work-intro">Products I designed and built end to end, with the code open on GitHub.</p>
+          <ul className="index">
+            {projects.map((p) => (
+              <li key={p.id}>
+                <a href={`#${p.id}`}>
+                  <span className="index-name">{p.title}</span>
+                  <span className="index-summary">{p.summary}</span>
+                  <span className={`index-status${p.status === "Live" ? " live" : ""}`}>{p.status}</span>
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href="#contact" className="index-open">
+                <span className="index-name">Your team&apos;s next project</span>
+                <span className="index-summary">Hiring, or have something to build?</span>
+                <span className="index-status">Let&apos;s talk</span>
+              </a>
+            </li>
+          </ul>
           {projects.map((p) => (
             <Slab key={p.title} p={p} />
           ))}
@@ -225,6 +268,8 @@ export default async function Home() {
 
         <section id="contact" className="contact">
           <h2 data-fx>Let&apos;s talk</h2>
+          <p className="contact-lead">Hiring for a backend role, or have a product to build? Send it through.</p>
+          {config.links.email && <ContactForm to={config.links.email.replace("mailto:", "")} />}
           <ul className="contact-links">
             <li>
               <a href={config.links.github} target="_blank" rel="noopener noreferrer">
@@ -250,6 +295,7 @@ export default async function Home() {
           © {new Date().getFullYear()} {config.name}
         </span>
         <span>{config.location}</span>
+        <span>No cookies. No tracking.</span>
       </footer>
     </>
   );
