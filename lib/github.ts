@@ -47,7 +47,8 @@ function resolve(p: FeaturedProject, repos: Repo[]): Project {
     description: p.description, // texto do config (mantém o site em inglês)
     stack: p.stack,
     url: repo?.html_url ?? p.url,
-    homepage: repo?.homepage || p.homepage || undefined,
+    // config wins over the GitHub "Website" field, which may be outdated
+    homepage: p.homepage || repo?.homepage || undefined,
     stars: repo ? repo.stargazers_count : null,
   };
 }
