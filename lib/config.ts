@@ -80,6 +80,7 @@ export const config = {
         "Turns any PDF into an interactive English worksheet that students answer on their phone, with hints and corrections on mistakes.",
       stack: ["JavaScript", "Node.js", "Claude API"],
       url: "https://github.com/AlexandroCunha/vocabloom",
+      homepage: "https://vocabloom-esl.vercel.app",
     },
   ] as FeaturedProject[],
 };
