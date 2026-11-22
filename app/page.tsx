@@ -2,7 +2,6 @@ import { config } from "@/lib/config";
 import { getProjects, type Project } from "@/lib/github";
 import Name from "@/components/Name";
 import ScrollFX from "@/components/ScrollFX";
-import LiveDemo from "@/components/LiveDemo";
 import Clock from "@/components/Clock";
 import ContactForm from "@/components/ContactForm";
 
@@ -159,7 +158,6 @@ function Slab({ p }: { p: Project }) {
         </figure>
       )}
 
-      {p.embed && <LiveDemo src={p.embed.src} title={p.title} note={p.embed.note} />}
     </article>
   );
 }

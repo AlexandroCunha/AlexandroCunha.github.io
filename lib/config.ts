@@ -26,8 +26,6 @@ export type FeaturedProject = {
   summary: string;
   /** "Live" or "Not deployed yet". */
   status: string;
-  /** Live app shown inside the page, loaded when the visitor clicks. */
-  embed?: { src: string; note: string };
   /** Screens taken from the project README (files in /public/shots). */
   shots?: { main: Shot; phone?: Shot; caption: string };
 };
@@ -132,10 +130,6 @@ export const config = {
       id: "financify",
       summary: "Personal finance, web app and API.",
       status: "Live",
-      embed: {
-        src: "https://financify-web-m2zy.onrender.com/?demo",
-        note: "Opens Financify signed in to a demo account with sample data, made just for you and deleted after 24 hours. The app is in Portuguese. The first load can take up to a minute while the free server wakes up.",
-      },
       kind: "Web app and API",
       description:
         "Personal finance in euros. Record income and expenses, see your balance and spot spending patterns by category and by month.",
