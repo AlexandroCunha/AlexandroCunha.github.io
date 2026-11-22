@@ -785,9 +785,6 @@ a:focus-visible {
     font-size: 1.1rem;
   }
 
-  .where {
-    display: none;
-  }
 
   .btn {
     min-height: 44px;
@@ -832,9 +829,6 @@ a:focus-visible {
     font-size: clamp(1.3rem, 3vw, 1.9rem);
   }
 
-  .where {
-    display: none;
-  }
 
   .hero-side .btn {
     justify-self: end;
@@ -955,9 +949,6 @@ a:focus-visible {
     font-size: clamp(1rem, 2.2vw, 1.4rem);
   }
 
-  .where {
-    display: none;
-  }
 
   /* the building stands alone on the right page, framed wide enough to keep the sun whole */
   .art {
@@ -1567,5 +1558,24 @@ a:focus-visible {
     grid-row: 2 / span 2;
     max-width: none;
     margin-top: clamp(32px, 4vw, 56px);
+  }
+}
+
+/* Tablets upright: tagline and Dublin time on the left, button on the right */
+@media (min-width: 640px) and (max-width: 1199px) and (orientation: portrait) {
+  .hero-main .tagline {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .hero-main .where {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .hero-side .btn {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    align-self: end;
   }
 }
