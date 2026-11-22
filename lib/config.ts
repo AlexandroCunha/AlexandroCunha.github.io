@@ -140,10 +140,10 @@ export const config = {
         main: {
           src: "/shots/financify-wide.webp",
           width: 1200,
-          height: 1160,
-          alt: "Financify dashboard with balance, income and expense cards, a month-by-month chart and spending by category.",
+          height: 1047,
+          alt: "Financify dashboard for November 2026: balance, income and expenses compared with October, a month-by-month chart, spending by category, what was left each month and the latest transactions.",
         },
-        caption: "The dashboard, with sample data.",
+        caption: "The dashboard of the demo account, with sample data.",
       },
     },
   ] as FeaturedProject[],
