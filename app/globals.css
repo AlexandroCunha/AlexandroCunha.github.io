@@ -1579,3 +1579,16 @@ a:focus-visible {
     align-self: end;
   }
 }
+
+.api-status.wait {
+  color: var(--ochre);
+}
+
+.api-recorded {
+  color: #a9b3b6;
+}
+
+.api-call:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
