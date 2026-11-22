@@ -21,7 +21,7 @@ export type Project = {
   id: string;
   summary: string;
   status: string;
-  apiDemo?: boolean;
+  embed?: FeaturedProject["embed"];
 };
 
 async function fetchRepos(): Promise<Repo[]> {
@@ -61,7 +61,7 @@ function resolve(p: FeaturedProject, repos: Repo[]): Project {
     id: p.id,
     summary: p.summary,
     status: p.status,
-    apiDemo: p.apiDemo,
+    embed: p.embed,
   };
 }
 
