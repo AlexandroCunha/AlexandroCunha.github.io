@@ -27,7 +27,7 @@ const CALLS: Call[] = [
     status: "200 OK",
     response: JSON.stringify(
       {
-        usuario: { id: 1, nome: "Ana Souza", email: "ana@email.com", criado_em: "2026-10-01T09:12:44.000Z" },
+        usuario: { id: 1, nome: "Ana Souza", email: "ana@email.com", demo: false, criado_em: "2026-10-01T09:12:44.000Z" },
         token: TOKEN,
       },
       null,

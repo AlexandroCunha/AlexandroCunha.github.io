@@ -131,13 +131,14 @@ export const config = {
       title: "Financify",
       id: "financify",
       summary: "Personal finance, web app and API.",
-      status: "Not deployed yet",
+      status: "Live",
       apiDemo: true,
       kind: "Web app and API",
       description:
         "Personal finance in euros. Record income and expenses, see your balance and spot spending patterns by category and by month.",
       stack: ["JavaScript", "Node.js", "Express", "React", "PostgreSQL", "JWT"],
       url: "https://github.com/AlexandroCunha/Financify",
+      homepage: "https://financify-web-m2zy.onrender.com/?demo", // ?demo opens a demo account with sample data
       shots: {
         main: {
           src: "/shots/financify-wide.webp",
