@@ -134,7 +134,7 @@ export const config = {
       status: "Live",
       kind: "Learning web app",
       description:
-        "Learn the Irish driving theory test (RSA) the way you learn a language: short lessons, 50 original questions in 7 units and animated top-down scenes for roundabouts and junctions. English by default, with Portuguese and Spanish in one tap, and optional study notes before each lesson.",
+        "Practise for the Irish driving theory test (RSA) in short lessons, like a language app. Roundabout and junction questions come with animated road scenes, and each lesson has optional study notes. Available in English, Portuguese and Spanish. 50 questions so far, with more coming soon.",
       stack: ["TypeScript", "Next.js", "PostgreSQL", "pnpm monorepo"],
       url: "https://github.com/AlexandroCunha/keep-left",
       privateRepo: true,
