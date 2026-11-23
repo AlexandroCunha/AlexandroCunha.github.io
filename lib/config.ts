@@ -141,7 +141,7 @@ export const config = {
       homepage: "https://keep-left.onrender.com",
       shots: {
         main: {
-          src: "/shots/keepleft-wide.webp",
+          src: "/shots/keepleft-2026-11-23.webp", // new name on each update, so browsers fetch the new image
           width: 1322,
           height: 932,
           alt: "Three Keep Left screens on a phone: the lesson path for Unit 1, Roundabouts; a question with a drawn roundabout showing your car and the other car; and the correct answer explained, with the page of the Rules of the Road it comes from.",
