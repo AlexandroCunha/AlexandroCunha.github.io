@@ -20,6 +20,8 @@ export type FeaturedProject = {
   url: string;
   /** Live site address, if any. */
   homepage?: string;
+  /** The repository is private: show that instead of a link visitors can't open. */
+  privateRepo?: boolean;
   /** Anchor id, used by the project index. */
   id: string;
   /** One line for the project index. */
@@ -122,6 +124,29 @@ export const config = {
           alt: "The same barbershop website on a phone.",
         },
         caption: "A demo shop with sample data.",
+      },
+    },
+    {
+      match: "keep-left",
+      title: "Keep Left",
+      id: "keep-left",
+      summary: "Irish driving theory, lesson by lesson.",
+      status: "Live",
+      kind: "Learning web app",
+      description:
+        "Learn the Irish driving theory test (RSA) the way you learn a language: short lessons, 50 original questions in 7 units and animated top-down scenes for roundabouts and junctions. English by default, with Portuguese and Spanish in one tap, and optional study notes before each lesson.",
+      stack: ["TypeScript", "Next.js", "PostgreSQL", "pnpm monorepo"],
+      url: "https://github.com/AlexandroCunha/keep-left",
+      privateRepo: true,
+      homepage: "https://keep-left.onrender.com",
+      shots: {
+        main: {
+          src: "/shots/keepleft-wide.webp",
+          width: 1322,
+          height: 932,
+          alt: "Three Keep Left screens on a phone: the lesson path for Unit 1, Roundabouts; a question with a drawn roundabout showing your car and the other car; and the correct answer explained, with the page of the Rules of the Road it comes from.",
+        },
+        caption: "The lesson path, a question with its road scene, and the answer with the rule from the book.",
       },
     },
     {

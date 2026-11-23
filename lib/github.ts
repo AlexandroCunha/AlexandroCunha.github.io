@@ -19,6 +19,7 @@ export type Project = {
   stars: number | null;
   shots?: FeaturedProject["shots"];
   id: string;
+  privateRepo?: boolean;
   summary: string;
   status: string;
 };
@@ -58,6 +59,7 @@ function resolve(p: FeaturedProject, repos: Repo[]): Project {
     stars: repo ? repo.stargazers_count : null,
     shots: p.shots,
     id: p.id,
+    privateRepo: p.privateRepo,
     summary: p.summary,
     status: p.status,
   };

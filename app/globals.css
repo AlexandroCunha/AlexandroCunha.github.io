@@ -1592,3 +1592,53 @@ a:focus-visible {
   opacity: 0.55;
   cursor: progress;
 }
+
+/* Project index with five places: one row on wide screens */
+.index {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .index {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .index li:nth-child(n) {
+    border-left: 1px solid var(--stone);
+    border-top: 0;
+  }
+
+  .index li:nth-child(3n + 1) {
+    border-left: 0;
+  }
+
+  .index li:nth-child(n + 4) {
+    border-top: 1px solid var(--stone);
+  }
+
+  .index li:nth-child(n) a {
+    padding-left: 20px;
+  }
+
+  .index li:nth-child(3n + 1) a:not(.index-open) {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .index {
+    grid-template-columns: 1fr;
+  }
+
+  .index li:nth-child(n) {
+    border-left: 0;
+  }
+
+  .index li + li {
+    border-top: 1px solid var(--stone);
+  }
+
+  .index li:nth-child(n) a:not(.index-open) {
+    padding: 16px 0 18px;
+  }
+}

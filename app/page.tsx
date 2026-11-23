@@ -119,9 +119,15 @@ function Slab({ p }: { p: Project }) {
               Live demo coming soon
             </span>
           )}
-          <a className="btn alt" href={p.url} target="_blank" rel="noopener noreferrer">
-            Code on GitHub
-          </a>
+          {p.privateRepo ? (
+            <span className="btn soon" aria-disabled="true">
+              Private repository
+            </span>
+          ) : (
+            <a className="btn alt" href={p.url} target="_blank" rel="noopener noreferrer">
+              Code on GitHub
+            </a>
+          )}
           {p.stars ? (
             <span className="stars">
               {p.stars} {p.stars === 1 ? "star" : "stars"}
